@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Админ-панель</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --primary:#0ea5e9;--accent:#38bdf8;--violet:#8b5cf6;
+  --dark:#0b1220;--gray-50:#f8fafc;--gray-100:#f1f5f9;--gray-200:#e2e8f0;
+  --gray-500:#64748b;--gray-700:#334155;--white:#fff;
+}
+body{font-family:'Inter',sans-serif;background:var(--gray-50);color:var(--dark);line-height:1.6}
+.hidden{display:none!important}
+
+/* ЛОГИН */
+.login-screen{max-width:420px;margin:100px auto;background:var(--white);padding:46px 38px;border-radius:22px;box-shadow:0 24px 48px rgba(15,23,42,.14);border:1px solid var(--gray-200)}
+.login-screen h2{margin-bottom:30px;text-align:center;font-size:1.5rem;font-weight:800}
+.login-screen input{width:100%;padding:13px 16px;border:1.5px solid var(--gray-200);border-radius:12px;font-size:.95rem;font-family:inherit;margin-bottom:16px}
+.login-screen input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px rgba(14,165,233,.12)}
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--accent),var(--primary));color:var(--white);padding:13px 26px;border-radius:12px;text-decoration:none;font-weight:600;font-size:.95rem;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(56,189,248,.3);font-family:inherit;transition:all .2s}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(56,189,248,.5)}
+.btn-secondary{background:var(--white);color:var(--dark);padding:11px 22px;border-radius:10px;border:1px solid var(--gray-200);cursor:pointer;font-weight:600;font-size:.9rem;font-family:inherit;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-secondary:hover{background:var(--gray-100)}
+.error{color:#dc2626;margin-top:12px;text-align:center;font-size:.9rem;font-weight:600}
+
+/* HEADER */
+.admin-header{background:var(--dark);color:var(--white);padding:18px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;position:sticky;top:0;z-index:50}
+.admin-header h2{font-size:1.15rem;font-weight:800}
+.admin-header > div{display:flex;gap:8px;flex-wrap:wrap}
+.admin-header .btn-secondary{background:rgba(255,255,255,.1);color:var(--white);border-color:rgba(255,255,255,.2)}
+.admin-header .btn-secondary:hover{background:rgba(255,255,255,.2)}
+.admin-body{padding:40px 28px;max-width:980px;margin:0 auto}
+.form-section{background:var(--white);padding:32px;border-radius:20px;margin-bottom:24px;box-shadow:0 1px 3px rgba(15,23,42,.08);border:1px solid var(--gray-200)}
+.form-section h3{margin-bottom:26px;padding-bottom:16px;border-bottom:2px solid var(--gray-100);font-size:1.05rem;font-weight:800}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;margin-bottom:8px;font-weight:600;color:var(--gray-700);font-size:.88rem}
+.form-group input,.form-group textarea{width:100%;padding:12px 14px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:.95rem;font-family:inherit;background:var(--white);color:var(--dark)}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px rgba(14,165,233,.12)}
+.form-group textarea{min-height:80px;resize:vertical}
+.item-card{background:var(--gray-50);padding:22px;border-radius:12px;margin-bottom:16px;position:relative;border:1px solid var(--gray-200)}
+.item-card .remove-btn{position:absolute;top:14px;right:14px;background:#fee2e2;color:#dc2626;border:none;border-radius:8px;padding:6px 14px;cursor:pointer;font-size:.8rem;font-weight:700;font-family:inherit;transition:all .2s}
+.item-card .remove-btn:hover{background:#dc2626;color:var(--white)}
+.add-btn{background:linear-gradient(135deg,#10b981,#059669);color:var(--white);border:none;padding:12px 26px;border-radius:12px;cursor:pointer;font-weight:700;font-size:.9rem;font-family:inherit;box-shadow:0 4px 12px rgba(16,185,129,.3)}
+.save-status{position:fixed;bottom:24px;right:24px;padding:16px 28px;border-radius:12px;background:#10b981;color:var(--white);font-weight:700;opacity:0;transform:translateY(20px);transition:all .3s;box-shadow:0 24px 48px rgba(15,23,42,.14);z-index:2000}
+.save-status.show{opacity:1;transform:translateY(0)}
+.orders-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.orders-table th,.orders-table td{padding:12px;border-bottom:1px solid var(--gray-200);text-align:left;vertical-align:top}
+.orders-table th{background:var(--gray-50);font-weight:700;color:var(--gray-700);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}
+.order-del{background:#fee2e2;color:#dc2626;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-weight:700}
+.order-del:hover{background:#dc2626;color:var(--white)}
+.orders-empty{text-align:center;color:var(--gray-500);padding:50px;font-size:1rem}
+@media(max-width:640px){.admin-header{padding:14px 20px}.admin-body{padding:24px 16px}.form-section{padding:20px}.login-screen{padding:30px 24px;margin:60px auto}}
+</style>
+</head>
+<body>
+
+<!-- ЛОГИН -->
+<div id="loginScreen" class="login-screen">
+  <h2>🔒 Вход в админку</h2>
+  <input type="password" id="passInput" placeholder="Пароль" autofocus>
+  <button class="btn-primary" id="loginBtn" style="width:100%;">Войти</button>
+  <p class="error" id="loginError"></p>
+  <p style="text-align:center;margin-top:16px;font-size:.82rem;color:var(--gray-500);">Пароль: <b>admin123</b></p>
+</div>
+
+<!-- ПАНЕЛЬ -->
+<div id="adminPanel" class="hidden">
+  <div class="admin-header">
+    <h2>⚙️ Панель управления</h2>
+    <div>
+      <button class="btn-primary" id="tabContent">📝 Контент</button>
+      <button class="btn-secondary" id="tabOrders">📦 Заказы (<span id="ordersCount">0</span>)</button>
+      <button class="btn-secondary" id="downloadBtn">⬇️ Скачать data.json</button>
+      <button class="btn-secondary" id="logoutBtn">🚪 Выйти</button>
+      <a href="index.html" class="btn-secondary">← На сайт</a>
+    </div>
+  </div>
+
+  <div id="contentTab" class="admin-body">
+    <div style="text-align:right;margin-bottom:20px;">
+      <button class="btn-primary" id="saveBtn">💾 Сохранить</button>
+    </div>
+    <div id="adminForm"></div>
+  </div>
+
+  <div id="ordersTab" class="admin-body hidden">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+      <h3 style="margin:0;font-size:1.2rem;font-weight:800;">Заказы клиентов</h3>
+      <div>
+        <button class="btn-primary" id="refreshOrders">🔄 Обновить</button>
+        <button class="btn-secondary" id="clearOrders" style="background:#fee2e2;color:#dc2626;">🗑️ Очистить все</button>
+      </div>
+    </div>
+    <div id="ordersList"></div>
+  </div>
+
+  <div id="saveStatus" class="save-status"></div>
+</div>
+
+<script>
+// ==============================================
+//   ЕДИНАЯ БАЗА: чтение data.json + localStorage
+// ==============================================
+const ADMIN_PASSWORD = 'admin123';
+
+const DB = {
+  async load() {
+    const saved = localStorage.getItem('site_db');
+    if (saved) { try { return JSON.parse(saved); } catch(e) {} }
+    try {
+      const res = await fetch('data.json');
+      return await res.json();
+    } catch(e) {
+      console.error('Не удалось загрузить data.json', e);
+      return { content: {}, orders: [] };
+    }
+  },
+  save(db) { localStorage.setItem('site_db', JSON.stringify(db)); }
+};
+
+let db = { content: {}, orders: [] };
+
+// ============ ЛОГИН ============
+const loginScreen = document.getElementById('loginScreen');
+const adminPanel = document.getElementById('adminPanel');
+
+async function openPanel() {
+  loginScreen.classList.add('hidden');
+  adminPanel.classList.remove('hidden');
+  db = await DB.load();
+  renderForm();
+  updateOrdersCount();
+}
+
+if (sessionStorage.getItem('admin') === '1') {
+  openPanel();
+}
+
+document.getElementById('loginBtn').onclick = () => {
+  if (document.getElementById('passInput').value === ADMIN_PASSWORD) {
+    sessionStorage.setItem('admin', '1');
+    openPanel();
+  } else {
+    document.getElementById('loginError').textContent = 'Неверный пароль';
+  }
+};
+
+document.getElementById('passInput').addEventListener('keypress', e => {
+  if (e.key === 'Enter') document.getElementById('loginBtn').click();
+});
+
+document.getElementById('logoutBtn').onclick = () => {
+  sessionStorage.removeItem('admin');
+  location.reload();
+};
+
+// ============ ФОРМА ============
+function renderForm() {
+  const f = document.getElementById('adminForm');
+  const c = db.content;
+  f.innerHTML = `
+    <div class="form-section">
+      <h3>🏠 Название сайта</h3>
+      <div class="form-group"><label>Логотип (эмодзи)</label>
+        <input value="${esc(c.site?.logo)}" oninput="db.content.site.logo=this.value"></div>
+      <div class="form-group"><label>Название</label>
+        <input value="${esc(c.site?.title)}" oninput="db.content.site.title=this.value"></div>
+    </div>
+    <div class="form-section">
+      <h3>🎬 Главный блок</h3>
+      <div class="form-group"><label>Заголовок</label>
+        <input value="${esc(c.hero?.title)}" oninput="db.content.hero.title=this.value"></div>
+      <div class="form-group"><label>Подзаголовок</label>
+        <textarea oninput="db.content.hero.subtitle=this.value">${c.hero?.subtitle||''}</textarea></div>
+      <div class="form-group"><label>Текст кнопки</label>
+        <input value="${esc(c.hero?.buttonText)}" oninput="db.content.hero.buttonText=this.value"></div>
+    </div>
+    <div class="form-section">
+      <h3>ℹ️ О нас</h3>
+      <div class="form-group"><label>Заголовок</label>
+        <input value="${esc(c.about?.title)}" oninput="db.content.about.title=this.value"></div>
+      <div class="form-group"><label>Текст</label>
+        <textarea rows="5" oninput="db.content.about.text=this.value">${c.about?.text||''}</textarea></div>
+      <div class="form-group"><label>URL картинки</label>
+        <input value="${esc(c.about?.image)}" oninput="db.content.about.image=this.value"></div>
+    </div>
+    <div class="form-section">
+      <h3>⭐ Преимущества</h3>
+      <div id="advEditor"></div>
+      <button class="add-btn" onclick="addAdv()">+ Добавить</button>
+    </div>
+    <div class="form-section">
+      <h3>📦 Товары</h3>
+      <div id="prodEditor"></div>
+      <button class="add-btn" onclick="addProd()">+ Добавить</button>
+    </div>
+    <div class="form-section">
+      <h3>📞 Подвал</h3>
+      <div class="form-group"><label>Адрес</label>
+        <input value="${esc(c.footer?.address)}" oninput="db.content.footer.address=this.value"></div>
+      <div class="form-group"><label>Телефон</label>
+        <input value="${esc(c.footer?.phone)}" oninput="db.content.footer.phone=this.value"></div>
+      <div class="form-group"><label>Email</label>
+        <input value="${esc(c.footer?.email)}" oninput="db.content.footer.email=this.value"></div>
+      <div class="form-group"><label>Копирайт</label>
+        <input value="${esc(c.footer?.copyright)}" oninput="db.content.footer.copyright=this.value"></div>
+    </div>
+  `;
+  renderAdv();
+  renderProd();
+}
+
+function renderAdv() {
+  const w = document.getElementById('advEditor');
+  w.innerHTML = '';
+  (db.content.advantages || []).forEach((a, i) => {
+    w.innerHTML += `
+      <div class="item-card">
+        <button class="remove-btn" onclick="delAdv(${i})">Удалить</button>
+        <div class="form-group"><label>Иконка</label>
+          <input value="${esc(a.icon)}" oninput="db.content.advantages[${i}].icon=this.value" maxlength="4"></div>
+        <div class="form-group"><label>Заголовок</label>
+          <input value="${esc(a.title)}" oninput="db.content.advantages[${i}].title=this.value"></div>
+        <div class="form-group"><label>Описание</label>
+          <textarea oninput="db.content.advantages[${i}].text=this.value">${a.text}</textarea></div>
+      </div>`;
+  });
+}
+
+function renderProd() {
+  const w = document.getElementById('prodEditor');
+  w.innerHTML = '';
+  (db.content.products || []).forEach((p, i) => {
+    w.innerHTML += `
+      <div class="item-card">
+        <button class="remove-btn" onclick="delProd(${i})">Удалить</button>
+        <div class="form-group"><label>Название</label>
+          <input value="${esc(p.name)}" oninput="db.content.products[${i}].name=this.value"></div>
+        <div class="form-group"><label>Цена</label>
+          <input value="${esc(p.price)}" oninput="db.content.products[${i}].price=this.value"></div>
+        <div class="form-group"><label>URL картинки</label>
+          <input value="${esc(p.image)}" oninput="db.content.products[${i}].image=this.value"></div>
+        <div class="form-group"><label>Описание</label>
+          <textarea oninput="db.content.products[${i}].description=this.value">${p.description}</textarea></div>
+      </div>`;
+  });
+}
+
+function addAdv() {
+  db.content.advantages.push({ icon:'✨', title:'Новое', text:'Описание' });
+  renderAdv();
+}
+function delAdv(i) { db.content.advantages.splice(i,1); renderAdv(); }
+function addProd() {
+  db.content.products.push({ name:'Новый товар', price:'0 ₽', image:'https://picsum.photos/seed/new/500/400', description:'Описание' });
+  renderProd();
+}
+function delProd(i) { db.content.products.splice(i,1); renderProd(); }
+
+// ============ СОХРАНЕНИЕ ============
+document.getElementById('saveBtn').onclick = () => {
+  DB.save(db);
+  showStatus('✅ Сохранено в браузере!');
+};
+
+// ============ СКАЧАТЬ data.json ============
+document.getElementById('downloadBtn').onclick = () => {
+  const blob = new Blob([JSON.stringify(db, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'data.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showStatus('⬇️ data.json скачан! Замените файл в папке сайта.');
+};
+
+// ============ ВКЛАДКИ ============
+document.getElementById('tabContent').onclick = () => {
+  document.getElementById('contentTab').classList.remove('hidden');
+  document.getElementById('ordersTab').classList.add('hidden');
+};
+document.getElementById('tabOrders').onclick = () => {
+  document.getElementById('ordersTab').classList.remove('hidden');
+  document.getElementById('contentTab').classList.add('hidden');
+  renderOrders();
+};
+
+// ============ ЗАКАЗЫ ============
+function updateOrdersCount() {
+  document.getElementById('ordersCount').textContent = (db.orders || []).length;
+}
+
+function renderOrders() {
+  updateOrdersCount();
+  const wrap = document.getElementById('ordersList');
+  const orders = db.orders || [];
+  if (orders.length === 0) {
+    wrap.innerHTML = '<div class="orders-empty">📭 Заказов пока нет</div>';
+    return;
+  }
+  let html = `<table class="orders-table"><thead><tr>
+    <th>#</th><th>Дата</th><th>Товар</th><th>Кол-во</th>
+    <th>Клиент</th><th>Контакты</th><th>Адрес</th><th>Комм.</th><th></th>
+  </tr></thead><tbody>`;
+  orders.slice().reverse().forEach((o, idx) => {
+    const realIdx = orders.length - 1 - idx;
+    html += `<tr>
+      <td>${realIdx + 1}</td>
+      <td>${o.date}</td>
+      <td><b>${escapeHtml(o.product)}</b><br><small>${o.price}</small></td>
+      <td>${o.quantity}</td>
+      <td>${escapeHtml(o.name)}</td>
+      <td>📞 ${escapeHtml(o.phone)}<br>✉️ ${escapeHtml(o.email||'—')}</td>
+      <td>${escapeHtml(o.address)}</td>
+      <td><small>${escapeHtml(o.comment||'—')}</small></td>
+      <td><button class="order-del" onclick="delOrder(${realIdx})">✖</button></td>
+    </tr>`;
+  });
+  html += '</tbody></table>';
+  wrap.innerHTML = html;
+}
+
+window.delOrder = (i) => {
+  if (!confirm('Удалить этот заказ?')) return;
+  db.orders.splice(i, 1);
+  DB.save(db);
+  renderOrders();
+};
+
+document.getElementById('refreshOrders').onclick = async () => {
+  db = await DB.load();
+  renderOrders();
+};
+
+document.getElementById('clearOrders').onclick = () => {
+  if (!confirm('Удалить ВСЕ заказы?')) return;
+  db.orders = [];
+  DB.save(db);
+  renderOrders();
+  showStatus('🗑️ Заказы очищены');
+};
+
+// ============ УТИЛИТЫ ============
+function showStatus(t) {
+  const s = document.getElementById('saveStatus');
+  s.textContent = t;
+  s.classList.add('show');
+  setTimeout(() => s.classList.remove('show'), 2600);
+}
+function esc(s) { return String(s??'').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function escapeHtml(s) { return String(s??'').replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+</script>
+</body>
+</html>
