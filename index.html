@@ -46,19 +46,18 @@ img{max-width:100%;display:block}
 .hero-stats{display:flex;gap:52px;padding-top:32px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap}
 .hero-stats strong{display:block;font-size:1.9rem;font-weight:800;background:linear-gradient(135deg,var(--accent),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero-stats span{font-size:.85rem;color:rgba(255,255,255,.55);margin-top:2px}
-.hero-visual{position:relative;min-height:420px;animation:fadeUp 1s ease .2s both}
-.hero-orb{position:absolute;inset:40px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(56,189,248,.5),transparent 60%),radial-gradient(circle at 70% 70%,rgba(139,92,246,.5),transparent 60%);filter:blur(40px);animation:orbPulse 6s ease-in-out infinite}
-@keyframes orbPulse{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.1);opacity:1}}
-.hero-card{position:absolute;display:flex;align-items:center;gap:14px;padding:16px 22px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:18px;backdrop-filter:blur(20px);z-index:1;box-shadow:0 20px 40px rgba(0,0,0,.3)}
-.hero-card strong{display:block;font-size:.95rem;color:var(--white)}
-.hero-card small{font-size:.8rem;color:rgba(255,255,255,.65)}
-.hero-card-emoji{font-size:2rem;width:52px;height:52px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.1);border-radius:14px}
-.hero-card-1{top:20px;left:10%;animation:float1 5s ease-in-out infinite}
-.hero-card-2{top:45%;right:0;animation:float2 6s ease-in-out infinite}
-.hero-card-3{bottom:20px;left:18%;animation:float3 7s ease-in-out infinite}
-@keyframes float1{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-18px) rotate(2deg)}}
-@keyframes float2{0%,100%{transform:translateY(0) rotate(2deg)}50%{transform:translateY(-22px) rotate(-3deg)}}
-@keyframes float3{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-16px) rotate(2deg)}}
+
+/* HERO IMAGE */
+.hero-image-wrap{position:relative;animation:fadeUp 1s ease .25s both}
+.hero-image-glow{position:absolute;inset:-20px;background:radial-gradient(circle at 50% 50%,rgba(56,189,248,.45),transparent 70%);filter:blur(40px);z-index:0;animation:orbPulse 6s ease-in-out infinite}
+@keyframes orbPulse{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.08);opacity:1}}
+.hero-image{position:relative;width:100%;aspect-ratio:4/3.2;object-fit:cover;border-radius:24px;border:1px solid rgba(255,255,255,.15);box-shadow:0 30px 60px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.06) inset;z-index:1;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.hero-image-wrap:hover .hero-image{transform:scale(1.02) rotate(-1deg)}
+.hero-image-badge{position:absolute;bottom:-18px;left:24px;display:flex;align-items:center;gap:12px;background:var(--white);padding:14px 20px;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,.3);z-index:2;animation:floatBadge 3.5s ease-in-out infinite}
+@keyframes floatBadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero-image-badge-icon{font-size:1.8rem}
+.hero-image-badge strong{display:block;font-size:.92rem;color:var(--dark)}
+.hero-image-badge small{font-size:.78rem;color:#64748b}
 
 /* КНОПКИ */
 .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--accent),var(--primary));color:var(--white);padding:14px 30px;border-radius:12px;text-decoration:none;font-weight:600;font-size:1rem;border:none;cursor:pointer;transition:all .25s;box-shadow:0 6px 20px rgba(56,189,248,.35);font-family:inherit}
@@ -82,7 +81,6 @@ img{max-width:100%;display:block}
 .about-image-wrap img{width:100%;border-radius:24px;box-shadow:var(--shadow-lg);aspect-ratio:4/3;object-fit:cover;transition:transform .5s}
 .about-image-wrap:hover img{transform:scale(1.02) rotate(-1deg)}
 .about-badge{position:absolute;bottom:-22px;left:-22px;background:var(--white);padding:16px 22px;border-radius:18px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:14px;animation:floatBadge 3.5s ease-in-out infinite}
-@keyframes floatBadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .about-badge-icon{font-size:2rem}
 .about-badge strong{display:block;font-size:.95rem}
 .about-badge small{font-size:.8rem;color:var(--gray-500)}
@@ -152,13 +150,35 @@ img{max-width:100%;display:block}
 .order-product .price{color:var(--primary);font-weight:800;font-size:1.15rem}
 .order-status{margin-top:18px;text-align:center;font-weight:600}
 
-@media(max-width:1024px){.hero-grid{grid-template-columns:1fr;gap:40px}.hero-visual{min-height:320px;order:-1}.about-grid{grid-template-columns:1fr;gap:50px}.footer-grid{grid-template-columns:1fr 1fr;gap:36px}}
-@media(max-width:768px){.nav{display:none}.section{padding:70px 0}.hero{padding:60px 0 80px}.hero-stats{gap:32px}.products-grid{grid-template-columns:1fr}}
-@media(max-width:560px){.container{padding:0 18px}.hero-actions{flex-direction:column;width:100%}.hero-actions a{width:100%}.form-row{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}}
+/* АДАПТИВ */
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero-image-wrap{order:-1;max-width:520px;margin:0 auto;width:100%}
+  .about-grid{grid-template-columns:1fr;gap:50px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:36px}
+}
+@media(max-width:768px){
+  .nav{display:none}
+  .section{padding:70px 0}
+  .hero{padding:60px 0 80px}
+  .hero-stats{gap:32px}
+  .products-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .container{padding:0 18px}
+  .hero-actions{flex-direction:column;width:100%}
+  .hero-actions a{width:100%}
+  .form-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .hero-image-badge{left:12px;padding:10px 14px;bottom:-14px}
+  .hero-image-badge-icon{font-size:1.4rem}
+  .hero-image-badge strong{font-size:.82rem}
+}
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header class="header">
   <div class="container header-inner">
     <a href="index.html" class="logo">
@@ -175,6 +195,7 @@ img{max-width:100%;display:block}
   </div>
 </header>
 
+<!-- HERO -->
 <section id="hero" class="hero">
   <div class="hero-bg"></div>
   <div class="container hero-grid">
@@ -192,24 +213,23 @@ img{max-width:100%;display:block}
         <div><strong>36 мес.</strong><span>гарантия</span></div>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="hero-orb"></div>
-      <div class="hero-card hero-card-1">
-        <div class="hero-card-emoji">📱</div>
-        <div><strong>Смартфоны</strong><small>от 9 990 ₽</small></div>
-      </div>
-      <div class="hero-card hero-card-2">
-        <div class="hero-card-emoji">💻</div>
-        <div><strong>Ноутбуки</strong><small>от 39 990 ₽</small></div>
-      </div>
-      <div class="hero-card hero-card-3">
-        <div class="hero-card-emoji">🎧</div>
-        <div><strong>Аудио</strong><small>от 2 990 ₽</small></div>
+
+    <!-- ИЗОБРАЖЕНИЕ -->
+    <div class="hero-image-wrap">
+      <div class="hero-image-glow"></div>
+      <img id="heroImage" src="" alt="Электроника" class="hero-image" />
+      <div class="hero-image-badge">
+        <span class="hero-image-badge-icon">⭐</span>
+        <div>
+          <strong>Топ-выбор клиентов</strong>
+          <small>Скидки до 30%</small>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- О НАС -->
 <section id="about" class="section">
   <div class="container about-grid">
     <div class="about-image-wrap">
@@ -233,6 +253,7 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
+<!-- ПРЕИМУЩЕСТВА -->
 <section id="advantages" class="section section-alt">
   <div class="container">
     <div class="section-head">
@@ -244,6 +265,7 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
+<!-- ТОВАРЫ -->
 <section id="products" class="section">
   <div class="container">
     <div class="section-head">
@@ -255,6 +277,7 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="footer">
   <div class="container footer-grid">
     <div>
@@ -282,6 +305,7 @@ img{max-width:100%;display:block}
   <div class="footer-bottom"><p id="footerCopyright"></p></div>
 </footer>
 
+<!-- МОДАЛКА ЗАКАЗА -->
 <div id="orderModal" class="modal hidden">
   <div class="modal-content">
     <div class="modal-header">
@@ -306,16 +330,12 @@ img{max-width:100%;display:block}
 
 <script>
 // ==============================================
-//  ЕДИНАЯ БАЗА: читаем data.json, пишем в localStorage
+//   ЕДИНАЯ БАЗА: data.json + localStorage
 // ==============================================
-
 const DB = {
-  // Читаем: сначала localStorage (если есть правки), иначе data.json
   async load() {
     const saved = localStorage.getItem('site_db');
-    if (saved) {
-      try { return JSON.parse(saved); } catch(e) {}
-    }
+    if (saved) { try { return JSON.parse(saved); } catch(e) {} }
     try {
       const res = await fetch('data.json');
       return await res.json();
@@ -324,9 +344,7 @@ const DB = {
       return { content: {}, orders: [] };
     }
   },
-  save(db) {
-    localStorage.setItem('site_db', JSON.stringify(db));
-  }
+  save(db) { localStorage.setItem('site_db', JSON.stringify(db)); }
 };
 
 let db = { content: {}, orders: [] };
@@ -342,9 +360,13 @@ async function render() {
   document.getElementById('heroTitle').textContent = c.hero?.title || '';
   document.getElementById('heroSubtitle').textContent = c.hero?.subtitle || '';
   document.getElementById('heroBtn').textContent = c.hero?.buttonText || 'Смотреть каталог';
+
+  // 🔥 HERO IMAGE
+  document.getElementById('heroImage').src = c.hero?.image || 'https://picsum.photos/seed/electronics-hero/900/700';
+
   document.getElementById('aboutTitle').textContent = c.about?.title || 'О нас';
   document.getElementById('aboutText').textContent = c.about?.text || '';
-  document.getElementById('aboutImage').src = c.about?.image || '';
+  document.getElementById('aboutImage').src = c.about?.image || 'https://picsum.photos/seed/electronics-office/900/700';
 
   const adv = document.getElementById('advantagesGrid');
   adv.innerHTML = '';
@@ -425,7 +447,6 @@ orderForm.onsubmit = (e) => {
     comment: fd.get('comment').trim()
   };
 
-  // Загружаем свежую БД, добавляем заказ, сохраняем
   DB.load().then(fresh => {
     fresh.orders = fresh.orders || [];
     fresh.orders.push(order);

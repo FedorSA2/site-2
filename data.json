@@ -1,29 +1,79 @@
 {
   "content": {
-    "site": { "title": "ЭлектронТех", "logo": "⚡" },
+    "site": {
+      "title": "ЭлектронТех",
+      "logo": "⚡"
+    },
     "hero": {
       "title": "Современная электроника для жизни и работы",
       "subtitle": "Смартфоны, ноутбуки, гаджеты — с гарантией и быстрой доставкой по России.",
-      "buttonText": "Смотреть каталог"
+      "buttonText": "Смотреть каталог",
+      "image": "https://picsum.photos/seed/electronics-hero/900/700"
     },
     "about": {
       "title": "О нас",
-      "text": "«ЭлектронТех» — команда инженеров, которая с 2012 года помогает выбирать технику без переплат.",
+      "text": "«ЭлектронТех» — команда инженеров, которая с 2012 года помогает выбирать технику без переплат. Мы работаем напрямую с производителями, тестируем каждую партию и даём честные консультации.",
       "image": "https://picsum.photos/seed/electronics-office/900/700"
     },
     "advantages": [
-      { "icon": "🚚", "title": "Быстрая доставка", "text": "Отправляем заказы в день оформления." },
-      { "icon": "🛡️", "title": "Гарантия", "text": "Официальная гарантия до 36 месяцев." },
-      { "icon": "💳", "title": "Удобная оплата", "text": "Карта, наличные, рассрочка 0%." },
-      { "icon": "🔧", "title": "Свой сервис", "text": "Ремонт в собственном сервис-центре." }
+      {
+        "icon": "🚚",
+        "title": "Быстрая доставка",
+        "text": "Отправляем заказы в день оформления. По Москве — курьером за 2 часа, по России — от 1 до 3 дней."
+      },
+      {
+        "icon": "🛡️",
+        "title": "Официальная гарантия",
+        "text": "Вся техника сертифицирована. Гарантия от 12 до 36 месяцев с бесплатным сервисным обслуживанием."
+      },
+      {
+        "icon": "💳",
+        "title": "Удобная оплата",
+        "text": "Наличные, карта, рассрочка 0% на 12 месяцев и оплата частями без переплат и скрытых комиссий."
+      },
+      {
+        "icon": "🔧",
+        "title": "Собственный сервис",
+        "text": "Ремонт и диагностика любой сложности в собственном сервисном центре с оригинальными запчастями."
+      }
     ],
     "products": [
-      { "name": "Смартфон Galaxy X Pro", "price": "59 990 ₽", "image": "https://picsum.photos/seed/phone-galaxy/500/400", "description": "6.7\" AMOLED, 256 ГБ, камера 108 Мп." },
-      { "name": "Ноутбук UltraBook 14", "price": "84 500 ₽", "image": "https://picsum.photos/seed/laptop-ultra/500/400", "description": "Intel Core i7, 16 ГБ RAM, SSD 1 ТБ." },
-      { "name": "Наушники AirPods Max", "price": "32 990 ₽", "image": "https://picsum.photos/seed/headphones-max/500/400", "description": "Шумоподавление, 30 часов работы." },
-      { "name": "Часы Watch Series 9", "price": "27 400 ₽", "image": "https://picsum.photos/seed/watch-series9/500/400", "description": "AMOLED, ЭКГ, защита 5 ATM." },
-      { "name": "Планшет Tab S9 11\"", "price": "45 700 ₽", "image": "https://picsum.photos/seed/tablet-s9/500/400", "description": "2.5K 120 Гц, стилус в комплекте." },
-      { "name": "Колонка Boom 3", "price": "9 890 ₽", "image": "https://picsum.photos/seed/speaker-boom3/500/400", "description": "40 Вт, IPX7, 24 часа работы." }
+      {
+        "name": "Смартфон Galaxy X Pro",
+        "price": "59 990 ₽",
+        "image": "https://picsum.photos/seed/phone-galaxy/500/400",
+        "description": "6.7\" AMOLED 120 Гц, 256 ГБ, тройная камера 108 Мп, батарея 5000 мА·ч."
+      },
+      {
+        "name": "Ноутбук UltraBook 14",
+        "price": "84 500 ₽",
+        "image": "https://picsum.photos/seed/laptop-ultra/500/400",
+        "description": "Intel Core i7, 16 ГБ RAM, SSD 1 ТБ, вес всего 1.2 кг, до 14 часов автономности."
+      },
+      {
+        "name": "Беспроводные наушники AirPods Max",
+        "price": "32 990 ₽",
+        "image": "https://picsum.photos/seed/headphones-max/500/400",
+        "description": "Активное шумоподавление, пространственное аудио, 30 часов работы с кейсом."
+      },
+      {
+        "name": "Умные часы Watch Series 9",
+        "price": "27 400 ₽",
+        "image": "https://picsum.photos/seed/watch-series9/500/400",
+        "description": "AMOLED-дисплей, ЭКГ и пульсометр, защита от воды 5 ATM, GPS-трекер."
+      },
+      {
+        "name": "Планшет Tab S9 11\"",
+        "price": "45 700 ₽",
+        "image": "https://picsum.photos/seed/tablet-s9/500/400",
+        "description": "Экран 2.5K 120 Гц, стилус в комплекте, 8 ГБ RAM, поддержка microSD до 1 ТБ."
+      },
+      {
+        "name": "Портативная колонка Boom 3",
+        "price": "9 890 ₽",
+        "image": "https://picsum.photos/seed/speaker-boom3/500/400",
+        "description": "Мощность 40 Вт, защита IPX7, 24 часа воспроизведения, Bluetooth 5.3."
+      }
     ],
     "footer": {
       "address": "г. Москва, ул. Электронная, д. 15, офис 302",
