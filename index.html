@@ -27,8 +27,11 @@ img{max-width:100%;display:block}
 .nav{display:flex;gap:4px}
 .nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.92rem;font-weight:500;padding:9px 16px;border-radius:10px;transition:all .2s}
 .nav a:hover{color:var(--white);background:rgba(255,255,255,.08)}
+.header-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .admin-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--accent),var(--primary));color:var(--white);padding:11px 22px;border-radius:12px;text-decoration:none;font-weight:600;font-size:.9rem;box-shadow:0 4px 16px rgba(56,189,248,.3);transition:all .25s}
 .admin-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(56,189,248,.5)}
+.game-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#422006;padding:11px 22px;border-radius:12px;text-decoration:none;font-weight:700;font-size:.9rem;box-shadow:0 4px 16px rgba(251,191,36,.35);transition:all .25s}
+.game-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(251,191,36,.5)}
 
 /* HERO */
 .hero{position:relative;padding:100px 0 120px;overflow:hidden;color:var(--white)}
@@ -65,7 +68,6 @@ img{max-width:100%;display:block}
 .btn-large{padding:16px 38px;font-size:1.02rem}
 .btn-ghost{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);color:var(--white);padding:16px 38px;border-radius:12px;text-decoration:none;font-weight:600;font-size:1.02rem;border:1px solid rgba(255,255,255,.18);transition:all .25s}
 .btn-ghost:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
-.btn-secondary{background:var(--gray-100);color:var(--dark);padding:12px 24px;border-radius:10px;border:1px solid var(--gray-200);cursor:pointer;font-weight:600;font-size:.9rem;transition:all .2s;font-family:inherit;text-decoration:none;display:inline-block}
 
 /* СЕКЦИИ */
 .section{padding:110px 0}
@@ -150,7 +152,6 @@ img{max-width:100%;display:block}
 .order-product .price{color:var(--primary);font-weight:800;font-size:1.15rem}
 .order-status{margin-top:18px;text-align:center;font-weight:600}
 
-/* АДАПТИВ */
 @media(max-width:1024px){
   .hero-grid{grid-template-columns:1fr;gap:40px}
   .hero-image-wrap{order:-1;max-width:520px;margin:0 auto;width:100%}
@@ -173,12 +174,15 @@ img{max-width:100%;display:block}
   .hero-image-badge{left:12px;padding:10px 14px;bottom:-14px}
   .hero-image-badge-icon{font-size:1.4rem}
   .hero-image-badge strong{font-size:.82rem}
+  .header-actions .game-btn,
+  .header-actions .admin-btn{padding:9px 14px;font-size:.82rem}
+  .logo{font-size:1rem}
+  .logo-icon{width:36px;height:36px;font-size:1.2rem}
 }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="header">
   <div class="container header-inner">
     <a href="index.html" class="logo">
@@ -191,11 +195,13 @@ img{max-width:100%;display:block}
       <a href="#advantages">Преимущества</a>
       <a href="#products">Товары</a>
     </nav>
-    <a href="admin.html" class="admin-btn">🔒 Админ</a>
+    <div class="header-actions">
+      <a href="game.html" class="game-btn">🎮 Играть</a>
+      <a href="admin.html" class="admin-btn">🔒 Админ</a>
+    </div>
   </div>
 </header>
 
-<!-- HERO -->
 <section id="hero" class="hero">
   <div class="hero-bg"></div>
   <div class="container hero-grid">
@@ -205,7 +211,7 @@ img{max-width:100%;display:block}
       <p id="heroSubtitle"></p>
       <div class="hero-actions">
         <a href="#products" class="btn-primary btn-large" id="heroBtn">Смотреть каталог</a>
-        <a href="#about" class="btn-ghost btn-large">О компании →</a>
+        <a href="game.html" class="btn-ghost btn-large">🎮 Игровая комната →</a>
       </div>
       <div class="hero-stats">
         <div><strong>40 000+</strong><span>клиентов</span></div>
@@ -213,8 +219,6 @@ img{max-width:100%;display:block}
         <div><strong>36 мес.</strong><span>гарантия</span></div>
       </div>
     </div>
-
-    <!-- ИЗОБРАЖЕНИЕ -->
     <div class="hero-image-wrap">
       <div class="hero-image-glow"></div>
       <img id="heroImage" src="" alt="Электроника" class="hero-image" />
@@ -229,7 +233,6 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
-<!-- О НАС -->
 <section id="about" class="section">
   <div class="container about-grid">
     <div class="about-image-wrap">
@@ -253,7 +256,6 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
-<!-- ПРЕИМУЩЕСТВА -->
 <section id="advantages" class="section section-alt">
   <div class="container">
     <div class="section-head">
@@ -265,7 +267,6 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
-<!-- ТОВАРЫ -->
 <section id="products" class="section">
   <div class="container">
     <div class="section-head">
@@ -277,7 +278,6 @@ img{max-width:100%;display:block}
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="container footer-grid">
     <div>
@@ -299,13 +299,13 @@ img{max-width:100%;display:block}
       <h4>Разделы</h4>
       <a href="#about" class="footer-link">О нас</a>
       <a href="#products" class="footer-link">Каталог</a>
+      <a href="game.html" class="footer-link">🎮 Игровая комната</a>
       <a href="admin.html" class="footer-link">Админ-панель</a>
     </div>
   </div>
   <div class="footer-bottom"><p id="footerCopyright"></p></div>
 </footer>
 
-<!-- МОДАЛКА ЗАКАЗА -->
 <div id="orderModal" class="modal hidden">
   <div class="modal-content">
     <div class="modal-header">
@@ -330,19 +330,76 @@ img{max-width:100%;display:block}
 
 <script>
 // ==============================================
-//   ЕДИНАЯ БАЗА: data.json + localStorage
+//   ВСТРОЕННЫЕ ДАННЫЕ (fallback, если data.json не загрузился)
+// ==============================================
+const FALLBACK_DATA = {
+  content: {
+    site: { title: 'ЭлектронТех', logo: '⚡' },
+    hero: {
+      title: 'Современная электроника для жизни и работы',
+      subtitle: 'Смартфоны, ноутбуки, гаджеты — с гарантией и быстрой доставкой по России.',
+      buttonText: 'Смотреть каталог',
+      image: 'https://picsum.photos/seed/electronics-hero/900/700'
+    },
+    about: {
+      title: 'О нас',
+      text: '«ЭлектронТех» — команда инженеров, которая с 2012 года помогает выбирать технику без переплат. Мы работаем напрямую с производителями, тестируем каждую партию и даём честные консультации.',
+      image: 'https://picsum.photos/seed/electronics-office/900/700'
+    },
+    advantages: [
+      { icon: '🚚', title: 'Быстрая доставка', text: 'Отправляем заказы в день оформления. По Москве — курьером за 2 часа.' },
+      { icon: '🛡️', title: 'Официальная гарантия', text: 'Вся техника сертифицирована. Гарантия от 12 до 36 месяцев.' },
+      { icon: '💳', title: 'Удобная оплата', text: 'Наличные, карта, рассрочка 0% на 12 месяцев.' },
+      { icon: '🔧', title: 'Собственный сервис', text: 'Ремонт и диагностика в собственном сервисном центре.' }
+    ],
+    products: [
+      { name: 'Смартфон Galaxy X Pro', price: '59 990 ₽', image: 'https://picsum.photos/seed/phone-galaxy/500/400', description: '6.7" AMOLED 120 Гц, 256 ГБ, камера 108 Мп.' },
+      { name: 'Ноутбук UltraBook 14', price: '84 500 ₽', image: 'https://picsum.photos/seed/laptop-ultra/500/400', description: 'Intel Core i7, 16 ГБ RAM, SSD 1 ТБ, вес 1.2 кг.' },
+      { name: 'Наушники AirPods Max', price: '32 990 ₽', image: 'https://picsum.photos/seed/headphones-max/500/400', description: 'Шумоподавление, пространственное аудио, 30 часов.' },
+      { name: 'Часы Watch Series 9', price: '27 400 ₽', image: 'https://picsum.photos/seed/watch-series9/500/400', description: 'AMOLED, ЭКГ, защита 5 ATM, GPS.' },
+      { name: 'Планшет Tab S9 11"', price: '45 700 ₽', image: 'https://picsum.photos/seed/tablet-s9/500/400', description: '2.5K 120 Гц, стилус, 8 ГБ RAM.' },
+      { name: 'Колонка Boom 3', price: '9 890 ₽', image: 'https://picsum.photos/seed/speaker-boom3/500/400', description: '40 Вт, IPX7, 24 часа, Bluetooth 5.3.' }
+    ],
+    footer: {
+      address: 'г. Москва, ул. Электронная, д. 15, офис 302',
+      phone: '+7 (495) 123-45-67',
+      email: 'info@electrotech.ru',
+      copyright: '© 2026 ЭлектронТех. Все права защищены.'
+    }
+  },
+  orders: []
+};
+
+// ==============================================
+//   БАЗА: data.json → localStorage → FALLBACK
 // ==============================================
 const DB = {
   async load() {
+    // 1. localStorage
     const saved = localStorage.getItem('site_db');
-    if (saved) { try { return JSON.parse(saved); } catch(e) {} }
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        // Проверка на валидность — должны быть content и products
+        if (parsed && parsed.content && Array.isArray(parsed.content.products) && parsed.content.products.length > 0) {
+          return parsed;
+        }
+      } catch(e) {}
+    }
+    // 2. data.json
     try {
       const res = await fetch('data.json');
-      return await res.json();
+      if (res.ok) {
+        const json = await res.json();
+        if (json && json.content && Array.isArray(json.content.products) && json.content.products.length > 0) {
+          return json;
+        }
+      }
     } catch(e) {
-      console.error('Не удалось загрузить data.json', e);
-      return { content: {}, orders: [] };
+      console.warn('data.json не загрузился, использую встроенные данные', e);
     }
+    // 3. Fallback
+    return JSON.parse(JSON.stringify(FALLBACK_DATA));
   },
   save(db) { localStorage.setItem('site_db', JSON.stringify(db)); }
 };
@@ -355,37 +412,53 @@ async function render() {
   db = await DB.load();
   const c = db.content || {};
 
+  // HEADER
   document.getElementById('logoIcon').textContent = c.site?.logo || '⚡';
-  document.getElementById('siteTitle').textContent = c.site?.title || '';
-  document.getElementById('heroTitle').textContent = c.hero?.title || '';
+  document.getElementById('siteTitle').textContent = c.site?.title || 'ЭлектронТех';
+
+  // HERO
+  document.getElementById('heroTitle').textContent = c.hero?.title || 'Современная электроника';
   document.getElementById('heroSubtitle').textContent = c.hero?.subtitle || '';
   document.getElementById('heroBtn').textContent = c.hero?.buttonText || 'Смотреть каталог';
-
-  // 🔥 HERO IMAGE
   document.getElementById('heroImage').src = c.hero?.image || 'https://picsum.photos/seed/electronics-hero/900/700';
 
+  // ABOUT
   document.getElementById('aboutTitle').textContent = c.about?.title || 'О нас';
   document.getElementById('aboutText').textContent = c.about?.text || '';
   document.getElementById('aboutImage').src = c.about?.image || 'https://picsum.photos/seed/electronics-office/900/700';
 
+  // ============ ПРЕИМУЩЕСТВА ============
   const adv = document.getElementById('advantagesGrid');
   adv.innerHTML = '';
-  (c.advantages || []).forEach((a, i) => {
-    adv.innerHTML += `
-      <div class="adv-card" style="animation-delay:${i*.08}s">
-        <div class="adv-icon">${a.icon}</div>
+  const advantages = c.advantages || [];
+  if (advantages.length === 0) {
+    adv.innerHTML = '<p style="text-align:center;color:#64748b;grid-column:1/-1;">Преимущества не найдены</p>';
+  } else {
+    advantages.forEach((a, i) => {
+      const card = document.createElement('div');
+      card.className = 'adv-card';
+      card.style.animationDelay = (i * 0.08) + 's';
+      card.innerHTML = `
+        <div class="adv-icon">${a.icon || '⭐'}</div>
         <h3>${esc(a.title)}</h3>
-        <p>${esc(a.text)}</p>
-      </div>`;
-  });
+        <p>${esc(a.text)}</p>`;
+      adv.appendChild(card);
+    });
+  }
 
+  // ============ ТОВАРЫ ============
   const prod = document.getElementById('productsGrid');
   prod.innerHTML = '';
-  (c.products || []).forEach((p, i) => {
-    prod.innerHTML += `
-      <div class="product-card">
+  const products = c.products || [];
+  if (products.length === 0) {
+    prod.innerHTML = '<p style="text-align:center;color:#64748b;grid-column:1/-1;">Товары не найдены</p>';
+  } else {
+    products.forEach((p, i) => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML = `
         <div class="product-image">
-          <img src="${p.image}" alt="${esc(p.name)}" loading="lazy">
+          <img src="${p.image || ''}" alt="${esc(p.name)}" loading="lazy" onerror="this.style.background='linear-gradient(135deg,#e0f2fe,#ede9fe)';this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22><rect fill=%22%23e0f2fe%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2250%25%22 font-size=%2280%22 text-anchor=%22middle%22 dy=%22.35em%22>📦</text></svg>'">
           <span class="product-tag">Хит</span>
         </div>
         <div class="product-body">
@@ -395,15 +468,24 @@ async function render() {
             <div class="price">${esc(p.price)}</div>
             <button class="buy-btn" onclick="openOrder(${i})">🛒 Купить</button>
           </div>
-        </div>
-      </div>`;
-  });
+        </div>`;
+      prod.appendChild(card);
+    });
+  }
 
+  // FOOTER
   document.getElementById('footerLogo').textContent = `${c.site?.logo || ''} ${c.site?.title || ''}`;
   document.getElementById('footerAddress').textContent = c.footer?.address || '';
   document.getElementById('footerPhone').textContent = '📞 ' + (c.footer?.phone || '');
   document.getElementById('footerEmail').textContent = '✉️ ' + (c.footer?.email || '');
   document.getElementById('footerCopyright').textContent = c.footer?.copyright || '';
+
+  // Отладка
+  console.log('✅ Данные загружены:', {
+    advantages: advantages.length,
+    products: products.length,
+    source: localStorage.getItem('site_db') ? 'localStorage' : 'data.json / fallback'
+  });
 }
 
 // ============ ЗАКАЗ ============
@@ -414,8 +496,9 @@ const orderProduct = document.getElementById('orderProduct');
 
 window.openOrder = function(i) {
   currentProduct = db.content.products[i];
+  if (!currentProduct) return;
   orderProduct.innerHTML = `
-    <img src="${currentProduct.image}" alt="">
+    <img src="${currentProduct.image || ''}" alt="">
     <div><strong>${esc(currentProduct.name)}</strong><p class="price">${esc(currentProduct.price)}</p></div>`;
   orderForm.reset();
   orderForm.quantity.value = 1;
@@ -447,27 +530,26 @@ orderForm.onsubmit = (e) => {
     comment: fd.get('comment').trim()
   };
 
-  DB.load().then(fresh => {
-    fresh.orders = fresh.orders || [];
-    fresh.orders.push(order);
-    DB.save(fresh);
-    db = fresh;
+  db.orders = db.orders || [];
+  db.orders.push(order);
+  DB.save(db);
 
-    orderStatus.style.color = '#10b981';
-    orderStatus.textContent = '✅ Заказ оформлен! Зайдите в админку, чтобы увидеть его.';
-    orderForm.reset();
-    setTimeout(() => {
-      orderModal.classList.add('hidden');
-      currentProduct = null;
-      document.body.style.overflow = '';
-    }, 2200);
-  });
+  orderStatus.style.color = '#10b981';
+  orderStatus.textContent = '✅ Заказ оформлен! Зайдите в админку, чтобы увидеть его.';
+  orderForm.reset();
+  setTimeout(() => {
+    orderModal.classList.add('hidden');
+    currentProduct = null;
+    document.body.style.overflow = '';
+  }, 2200);
 };
 
+// ============ УТИЛИТЫ ============
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
 
+// СТАРТ
 render();
 </script>
 </body>

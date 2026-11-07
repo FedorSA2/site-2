@@ -2,94 +2,104 @@
   "startingCoins": 100,
   "items": [
     {
-      "id": "sofa",
-      "name": "Уютный диван",
-      "price": 50,
-      "emoji": "🛋️",
+      "id": "phone",
+      "name": "Смартфон Galaxy X Pro",
+      "price": 600,
+      "emoji": "📱",
+      "description": "6.7\" AMOLED 120 Гц, 256 ГБ, камера 108 Мп",
       "x": 15,
       "y": 60,
+      "size": 70
+    },
+    {
+      "id": "laptop",
+      "name": "Ноутбук UltraBook 14",
+      "price": 850,
+      "emoji": "💻",
+      "description": "Intel Core i7, 16 ГБ RAM, SSD 1 ТБ",
+      "x": 60,
+      "y": 50,
+      "size": 75
+    },
+    {
+      "id": "headphones",
+      "name": "Наушники AirPods Max",
+      "price": 330,
+      "emoji": "🎧",
+      "description": "Шумоподавление, 30 часов работы",
+      "x": 40,
+      "y": 70,
+      "size": 60
+    },
+    {
+      "id": "watch",
+      "name": "Часы Watch Series 9",
+      "price": 275,
+      "emoji": "⌚",
+      "description": "AMOLED, ЭКГ, защита 5 ATM",
+      "x": 85,
+      "y": 65,
+      "size": 55
+    },
+    {
+      "id": "tablet",
+      "name": "Планшет Tab S9 11\"",
+      "price": 460,
+      "emoji": "📲",
+      "description": "2.5K 120 Гц, стилус в комплекте",
+      "x": 25,
+      "y": 30,
+      "size": 65
+    },
+    {
+      "id": "speaker",
+      "name": "Колонка Boom 3",
+      "price": 100,
+      "emoji": "🔊",
+      "description": "40 Вт, IPX7, 24 часа работы",
+      "x": 75,
+      "y": 25,
+      "size": 55
+    },
+    {
+      "id": "sofa",
+      "name": "Уютный диван",
+      "price": 150,
+      "emoji": "🛋️",
+      "description": "Мягкий диван для вашей комнаты",
+      "x": 10,
+      "y": 75,
       "size": 80
     },
     {
       "id": "plant",
       "name": "Фикус в горшке",
-      "price": 30,
+      "price": 60,
       "emoji": "🪴",
+      "description": "Зелёный друг для уюта",
       "x": 5,
-      "y": 65,
-      "size": 60
-    },
-    {
-      "id": "lamp",
-      "name": "Торшер",
-      "price": 40,
-      "emoji": "💡",
-      "x": 80,
-      "y": 55,
-      "size": 55
+      "y": 50,
+      "size": 50
     },
     {
       "id": "tv",
       "name": "Телевизор",
-      "price": 120,
+      "price": 500,
       "emoji": "📺",
-      "x": 40,
-      "y": 25,
+      "description": "4K OLED, 55 дюймов",
+      "x": 50,
+      "y": 15,
       "size": 75
-    },
-    {
-      "id": "computer",
-      "name": "Компьютер",
-      "price": 90,
-      "emoji": "🖥️",
-      "x": 65,
-      "y": 45,
-      "size": 70
     },
     {
       "id": "cat",
       "name": "Кот-компаньон",
-      "price": 150,
+      "price": 700,
       "emoji": "🐱",
+      "description": "Пушистый друг, который мурлычет",
       "x": 30,
-      "y": 70,
-      "size": 60
-    },
-    {
-      "id": "carpet",
-      "name": "Ковёр",
-      "price": 45,
-      "emoji": "🟫",
-      "x": 45,
       "y": 80,
-      "size": 100
-    },
-    {
-      "id": "bookshelf",
-      "name": "Книжный шкаф",
-      "price": 70,
-      "emoji": "📚",
-      "x": 85,
-      "y": 30,
-      "size": 70
-    },
-    {
-      "id": "fish",
-      "name": "Аквариум",
-      "price": 100,
-      "emoji": "🐠",
-      "x": 10,
-      "y": 35,
-      "size": 65
-    },
-    {
-      "id": "poster",
-      "name": "Постер",
-      "price": 25,
-      "emoji": "🖼️",
-      "x": 50,
-      "y": 15,
-      "size": 60
+      "size": 50
     }
   ]
 }
