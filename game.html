@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Игровая комната — ЭлектронТех</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --primary:#0ea5e9;--accent:#38bdf8;--violet:#8b5cf6;
+  --dark:#0b1220;--gray-50:#f8fafc;--gray-100:#f1f5f9;--gray-200:#e2e8f0;
+  --gray-500:#64748b;--gray-700:#334155;--white:#fff;
+  --gold:#fbbf24;
+}
+body{font-family:'Inter',sans-serif;color:var(--dark);background:var(--gray-50);line-height:1.6;min-height:100vh}
+.container{max-width:1280px;margin:0 auto;padding:0 24px}
+
+/* HEADER */
+.header{background:rgba(11,18,32,.95);backdrop-filter:blur(20px);color:var(--white);padding:16px 0;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.08)}
+.header-inner{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white);font-weight:800;font-size:1.2rem}
+.logo-icon{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;font-size:1.3rem;background:linear-gradient(135deg,var(--accent),var(--violet));border-radius:12px}
+.back-btn{background:rgba(255,255,255,.1);color:var(--white);padding:9px 18px;border-radius:10px;text-decoration:none;font-weight:600;font-size:.9rem;transition:all .2s}
+.back-btn:hover{background:rgba(255,255,255,.2)}
+
+/* БАЛАНС */
+.balance-box{
+  display:flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,#fbbf24,#f59e0b);
+  padding:10px 22px;border-radius:14px;font-weight:800;font-size:1.1rem;
+  color:#422006;box-shadow:0 4px 16px rgba(251,191,36,.4);
+  animation:coinPulse 2s ease-in-out infinite;
+}
+@keyframes coinPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+.balance-box .coin{font-size:1.4rem}
+
+/* TABS */
+.tabs{display:flex;gap:8px;padding:24px 0 0;flex-wrap:wrap}
+.tab{background:var(--white);border:1px solid var(--gray-200);padding:12px 24px;border-radius:12px;cursor:pointer;font-weight:600;font-size:.92rem;font-family:inherit;transition:all .2s;color:var(--gray-700)}
+.tab:hover{background:var(--gray-100)}
+.tab.active{background:linear-gradient(135deg,var(--accent),var(--primary));color:var(--white);border-color:transparent;box-shadow:0 4px 14px rgba(56,189,248,.35)}
+
+/* КОМНАТА */
+.room-section{padding:24px 0 60px}
+.room-wrapper{
+  position:relative;width:100%;aspect-ratio:16/10;
+  border-radius:24px;overflow:hidden;
+  background:linear-gradient(180deg,#1e293b 0%,#334155 60%,#475569 100%);
+  box-shadow:0 30px 60px rgba(15,23,42,.3);
+  border:1px solid rgba(255,255,255,.1);
+}
+/* Пол */
+.room-wrapper::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:30%;
+  background:linear-gradient(180deg,#78350f,#451a03);
+  border-top:2px solid #92400e;
+}
+/* Окно */
+.room-window{
+  position:absolute;top:8%;left:8%;width:22%;height:32%;
+  background:linear-gradient(180deg,#0ea5e9,#38bdf8);
+  border:6px solid #1e293b;border-radius:8px;
+  box-shadow:inset 0 0 30px rgba(255,255,255,.3);
+}
+.room-window::before,.room-window::after{content:'';position:absolute;background:#1e293b}
+.room-window::before{left:50%;top:0;bottom:0;width:4px;transform:translateX(-50%)}
+.room-window::after{top:50%;left:0;right:0;height:4px;transform:translateY(-50%)}
+
+.item-in-room{
+  position:absolute;
+  transform:translate(-50%,-50%);
+  filter:drop-shadow(0 8px 16px rgba(0,0,0,.4));
+  animation:itemAppear .6s cubic-bezier(.34,1.56,.64,1);
+  transition:transform .3s;
+  cursor:pointer;
+}
+.item-in-room:hover{transform:translate(-50%,-50%) scale(1.15)}
+@keyframes itemAppear{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(0) rotate(-180deg)}
+  100%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0)}
+}
+
+.room-empty{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.5);font-size:1.1rem;text-align:center;padding:20px;z-index:1;
+}
+
+/* МИНИ-ИГРЫ */
+.games-section{padding:24px 0 60px}
+.games-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.game-card{
+  background:var(--white);border-radius:20px;padding:32px 28px;
+  box-shadow:0 4px 12px rgba(15,23,42,.08);border:1px solid var(--gray-200);
+  transition:all .3s;display:flex;flex-direction:column;
+}
+.game-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(15,23,42,.12);border-color:var(--accent)}
+.game-emoji{font-size:3rem;margin-bottom:16px;text-align:center}
+.game-title{font-size:1.3rem;font-weight:800;margin-bottom:8px;text-align:center}
+.game-desc{color:var(--gray-500);font-size:.92rem;margin-bottom:20px;text-align:center;flex:1}
+.game-reward{display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700;color:var(--gold);margin-bottom:16px;font-size:.95rem}
+.btn-game{
+  background:linear-gradient(135deg,var(--accent),var(--primary));color:var(--white);
+  border:none;padding:14px 28px;border-radius:12px;font-weight:700;font-size:1rem;
+  cursor:pointer;font-family:inherit;transition:all .2s;
+  box-shadow:0 6px 18px rgba(56,189,248,.35);
+}
+.btn-game:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(56,189,248,.5)}
+.btn-game:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* ИГРА: угадай число */
+.guess-input{
+  width:100%;padding:12px 16px;border:2px solid var(--gray-200);border-radius:10px;
+  font-size:1.1rem;text-align:center;font-family:inherit;font-weight:700;margin-bottom:12px;
+}
+.guess-input:focus{outline:none;border-color:var(--primary)}
+.game-msg{text-align:center;font-weight:700;min-height:24px;margin-bottom:12px;font-size:.95rem}
+.game-msg.win{color:#10b981}
+.game-msg.lose{color:#dc2626}
+.game-msg.hint{color:#f59e0b}
+
+/* Игра: клик-таймер */
+.click-target{
+  display:flex;align-items:center;justify-content:center;
+  width:120px;height:120px;margin:0 auto 16px;
+  background:linear-gradient(135deg,var(--accent),var(--violet));
+  border-radius:50%;font-size:3rem;cursor:pointer;
+  box-shadow:0 10px 30px rgba(139,92,246,.4);
+  transition:transform .1s;user-select:none;
+}
+.click-target:active{transform:scale(.92)}
+.click-timer{text-align:center;font-size:2rem;font-weight:800;margin-bottom:8px;color:var(--primary)}
+
+/* Игра: реакция */
+.reaction-zone{
+  display:flex;align-items:center;justify-content:center;
+  height:140px;border-radius:16px;font-size:1.1rem;font-weight:700;
+  cursor:pointer;transition:background .2s;margin-bottom:16px;user-select:none;
+}
+.reaction-zone.wait{background:#fef3c7;color:#92400e}
+.reaction-zone.go{background:#10b981;color:var(--white);font-size:1.5rem}
+.reaction-zone.result{background:#dbeafe;color:#1e40af}
+
+/* МАГАЗИН */
+.shop-section{padding:24px 0 60px}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px}
+.shop-item{
+  background:var(--white);border-radius:16px;padding:24px 20px;
+  box-shadow:0 4px 12px rgba(15,23,42,.08);border:1px solid var(--gray-200);
+  text-align:center;transition:all .3s;display:flex;flex-direction:column;
+}
+.shop-item:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(15,23,42,.12)}
+.shop-emoji{font-size:3rem;margin-bottom:12px}
+.shop-name{font-size:1rem;font-weight:700;margin-bottom:8px}
+.shop-price{display:flex;align-items:center;justify-content:center;gap:6px;font-weight:800;color:var(--gold);margin-bottom:16px;font-size:1.05rem;flex:1}
+.btn-buy{
+  background:linear-gradient(135deg,#10b981,#059669);color:var(--white);
+  border:none;padding:10px 20px;border-radius:10px;font-weight:700;font-size:.9rem;
+  cursor:pointer;font-family:inherit;transition:all .2s;
+}
+.btn-buy:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(16,185,129,.4)}
+.btn-buy:disabled{background:var(--gray-200);color:var(--gray-500);cursor:not-allowed;transform:none;box-shadow:none}
+.shop-item.owned{background:#f0fdf4;border-color:#10b981}
+.owned-badge{color:#10b981;font-weight:800;font-size:.9rem;padding:10px 0}
+
+/* Секции */
+.section-head{text-align:center;margin-bottom:36px}
+.section-title{font-size:2rem;font-weight:800;margin-bottom:8px}
+.section-sub{color:var(--gray-500);font-size:1rem}
+.hidden{display:none!important}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);
+  background:var(--dark);color:var(--white);padding:16px 32px;border-radius:12px;
+  font-weight:700;box-shadow:0 20px 40px rgba(0,0,0,.3);opacity:0;
+  transition:all .35s cubic-bezier(.34,1.56,.64,1);z-index:2000;
+}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toast.win{background:#10b981}
+.toast.lose{background:#dc2626}
+
+@media(max-width:640px){
+  .container{padding:0 16px}
+  .balance-box{padding:8px 16px;font-size:1rem}
+  .section-title{font-size:1.5rem}
+  .game-card{padding:24px 20px}
+  .shop-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+  .shop-emoji{font-size:2.4rem}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">⚡</span>
+      <span>ЭлектронТех · Игры</span>
+    </a>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+      <div class="balance-box">
+        <span class="coin">🪙</span>
+        <span id="balance">0</span>
+      </div>
+      <a href="index.html" class="back-btn">← В магазин</a>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="tabs">
+    <button class="tab active" data-tab="room">🏠 Комната</button>
+    <button class="tab" data-tab="games">🎮 Мини-игры</button>
+    <button class="tab" data-tab="shop">🛍️ Магазин предметов</button>
+  </div>
+</div>
+
+<!-- КОМНАТА -->
+<div class="room-section" id="roomTab">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Ваша комната</h2>
+      <p class="section-sub">Здесь появляются купленные предметы</p>
+    </div>
+    <div class="room-wrapper" id="room">
+      <div class="room-window"></div>
+      <div class="room-empty" id="roomEmpty">
+        🏚️ Пока пусто...<br>Заработайте монеты и купите предметы!
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- МИНИ-ИГРЫ -->
+<div class="games-section hidden" id="gamesTab">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Мини-игры</h2>
+      <p class="section-sub">Играйте и зарабатывайте монеты 🪙</p>
+    </div>
+    <div class="games-grid">
+
+      <!-- Игра 1: Угадай число -->
+      <div class="game-card">
+        <div class="game-emoji">🎲</div>
+        <h3 class="game-title">Угадай число</h3>
+        <p class="game-desc">Загадано число от 1 до 10. Угадайте его с 3 попыток!</p>
+        <div class="game-reward">🪙 +30 за победу</div>
+        <div class="game-msg" id="guessMsg"></div>
+        <input type="number" class="guess-input" id="guessInput" placeholder="1–10" min="1" max="10">
+        <button class="btn-game" id="guessBtn" onclick="playGuess()">Проверить</button>
+        <p style="text-align:center;margin-top:12px;font-size:.85rem;color:var(--gray-500);">
+          Попыток: <b id="guessAttempts">3</b>
+        </p>
+      </div>
+
+      <!-- Игра 2: Клик-таймер -->
+      <div class="game-card">
+        <div class="game-emoji">⏱️</div>
+        <h3 class="game-title">Клик-таймер</h3>
+        <p class="game-desc">Нажмите на круг, когда таймер покажет ровно 3.00 сек</p>
+        <div class="game-reward">🪙 +50 за точность</div>
+        <div class="click-timer" id="clickTimer">0.00</div>
+        <div class="click-target" id="clickTarget">⏱️</div>
+        <div class="game-msg" id="clickMsg"></div>
+      </div>
+
+      <!-- Игра 3: Реакция -->
+      <div class="game-card">
+        <div class="game-emoji">⚡</div>
+        <h3 class="game-title">Реакция</h3>
+        <p class="game-desc">Нажмите, как только блок станет зелёным</p>
+        <div class="game-reward">🪙 +40 если &lt; 400 мс</div>
+        <div class="reaction-zone wait" id="reactionZone">Нажмите «Старт»</div>
+        <button class="btn-game" id="reactionBtn" onclick="startReaction()">Старт</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- МАГАЗИН -->
+<div class="shop-section hidden" id="shopTab">
+  <div class="container">
+    <div class="section-head">
+      <h2 class="section-title">Магазин предметов</h2>
+      <p class="section-sub">Купите предмет — он появится в комнате</p>
+    </div>
+    <div class="shop-grid" id="shopGrid"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ==============================================
+//   ИГРОВАЯ БАЗА: game-data.json + localStorage
+// ==============================================
+const GAME_DB = {
+  key: 'game_data',
+  async load() {
+    const saved = localStorage.getItem(this.key);
+    if (saved) { try { return JSON.parse(saved); } catch(e) {} }
+    try {
+      const res = await fetch('game-data.json');
+      const json = await res.json();
+      // Инициализация: баланс + пустой инвентарь
+      const init = {
+        balance: json.startingCoins || 100,
+        inventory: [],
+        items: json.items || []
+      };
+      this.save(init);
+      return init;
+    } catch(e) {
+      console.error('Не удалось загрузить game-data.json', e);
+      return { balance: 100, inventory: [], items: [] };
+    }
+  },
+  save(data) { localStorage.setItem(this.key, JSON.stringify(data)); }
+};
+
+let gdb = { balance: 0, inventory: [], items: [] };
+
+// ============ ИНИЦИАЛИЗАЦИЯ ============
+async function init() {
+  gdb = await GAME_DB.load();
+  updateBalance();
+  renderRoom();
+  renderShop();
+}
+
+function updateBalance() {
+  document.getElementById('balance').textContent = gdb.balance;
+}
+
+function addCoins(amount) {
+  gdb.balance += amount;
+  GAME_DB.save(gdb);
+  updateBalance();
+  showToast(`+${amount} 🪙`, 'win');
+}
+
+// ============ ВКЛАДКИ ============
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.onclick = () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const target = tab.dataset.tab;
+    document.getElementById('roomTab').classList.toggle('hidden', target !== 'room');
+    document.getElementById('gamesTab').classList.toggle('hidden', target !== 'games');
+    document.getElementById('shopTab').classList.toggle('hidden', target !== 'shop');
+    if (target === 'room') renderRoom();
+    if (target === 'shop') renderShop();
+  };
+});
+
+// ============ КОМНАТА ============
+function renderRoom() {
+  const room = document.getElementById('room');
+  // Удаляем все предметы (оставляем окно и пустой текст)
+  room.querySelectorAll('.item-in-room').forEach(el => el.remove());
+
+  const owned = gdb.inventory || [];
+  if (owned.length === 0) {
+    document.getElementById('roomEmpty').style.display = 'flex';
+    return;
+  }
+  document.getElementById('roomEmpty').style.display = 'none';
+
+  owned.forEach(id => {
+    const item = gdb.items.find(i => i.id === id);
+    if (!item) return;
+    const el = document.createElement('div');
+    el.className = 'item-in-room';
+    el.style.left = item.x + '%';
+    el.style.top = item.y + '%';
+    el.style.fontSize = item.size + 'px';
+    el.textContent = item.emoji;
+    el.title = item.name;
+    room.appendChild(el);
+  });
+}
+
+// ============ МАГАЗИН ============
+function renderShop() {
+  const grid = document.getElementById('shopGrid');
+  grid.innerHTML = '';
+  gdb.items.forEach(item => {
+    const owned = (gdb.inventory || []).includes(item.id);
+    const canAfford = gdb.balance >= item.price;
+    grid.innerHTML += `
+      <div class="shop-item ${owned ? 'owned' : ''}">
+        <div class="shop-emoji">${item.emoji}</div>
+        <div class="shop-name">${item.name}</div>
+        <div class="shop-price">🪙 ${item.price}</div>
+        ${owned
+          ? '<div class="owned-badge">✅ Куплено</div>'
+          : `<button class="btn-buy" onclick="buyItem('${item.id}')" ${!canAfford ? 'disabled' : ''}>
+               ${canAfford ? 'Купить' : 'Мало монет'}
+             </button>`
+        }
+      </div>`;
+  });
+}
+
+window.buyItem = (id) => {
+  const item = gdb.items.find(i => i.id === id);
+  if (!item) return;
+  if (gdb.inventory.includes(id)) return;
+  if (gdb.balance < item.price) { showToast('Недостаточно монет!', 'lose'); return; }
+
+  gdb.balance -= item.price;
+  gdb.inventory.push(id);
+  GAME_DB.save(gdb);
+  updateBalance();
+  renderShop();
+  renderRoom();
+  showToast(`Куплено: ${item.name} ${item.emoji}`, 'win');
+};
+
+// ============ ИГРА 1: УГАДАЙ ЧИСЛО ============
+let guessSecret = 0, guessAttemptsLeft = 3, guessActive = false;
+
+function startGuess() {
+  guessSecret = Math.floor(Math.random() * 10) + 1;
+  guessAttemptsLeft = 3;
+  guessActive = true;
+  document.getElementById('guessAttempts').textContent = guessAttemptsLeft;
+  document.getElementById('guessMsg').textContent = '';
+  document.getElementById('guessMsg').className = 'game-msg';
+  document.getElementById('guessInput').value = '';
+  document.getElementById('guessInput').focus();
+  document.getElementById('guessBtn').textContent = 'Проверить';
+}
+
+window.playGuess = () => {
+  if (!guessActive) {
+    startGuess();
+    return;
+  }
+  const val = parseInt(document.getElementById('guessInput').value);
+  if (!val || val < 1 || val > 10) {
+    document.getElementById('guessMsg').textContent = 'Введите число от 1 до 10';
+    document.getElementById('guessMsg').className = 'game-msg hint';
+    return;
+  }
+  guessAttemptsLeft--;
+  document.getElementById('guessAttempts').textContent = guessAttemptsLeft;
+
+  const msg = document.getElementById('guessMsg');
+  if (val === guessSecret) {
+    msg.textContent = `🎉 Угадали! Это было ${guessSecret}`;
+    msg.className = 'game-msg win';
+    addCoins(30);
+    guessActive = false;
+    document.getElementById('guessBtn').textContent = 'Играть снова';
+  } else if (guessAttemptsLeft <= 0) {
+    msg.textContent = `😢 Не угадали. Было число ${guessSecret}`;
+    msg.className = 'game-msg lose';
+    guessActive = false;
+    document.getElementById('guessBtn').textContent = 'Играть снова';
+  } else {
+    msg.textContent = val < guessSecret ? '📈 Больше!' : '📉 Меньше!';
+    msg.className = 'game-msg hint';
+  }
+};
+
+// ============ ИГРА 2: КЛИК-ТАЙМЕР ============
+let clickStartTime = 0, clickRunning = false, clickInterval = null;
+
+const clickTarget = document.getElementById('clickTarget');
+const clickTimerEl = document.getElementById('clickTimer');
+const clickMsgEl = document.getElementById('clickMsg');
+
+clickTarget.onclick = () => {
+  if (!clickRunning) {
+    // Старт
+    clickRunning = true;
+    clickStartTime = Date.now();
+    clickMsgEl.textContent = '';
+    clickMsgEl.className = 'game-msg';
+    clickInterval = setInterval(() => {
+      const elapsed = (Date.now() - clickStartTime) / 1000;
+      clickTimerEl.textContent = elapsed.toFixed(2);
+      if (elapsed >= 5) {
+        clearInterval(clickInterval);
+        clickRunning = false;
+        clickMsgEl.textContent = '⌛ Слишком долго! Попробуйте снова.';
+        clickMsgEl.className = 'game-msg lose';
+        clickTimerEl.textContent = '0.00';
+      }
+    }, 10);
+  } else {
+    // Остановка
+    clearInterval(clickInterval);
+    clickRunning = false;
+    const elapsed = (Date.now() - clickStartTime) / 1000;
+    clickTimerEl.textContent = elapsed.toFixed(2);
+    const diff = Math.abs(elapsed - 3);
+    if (diff <= 0.15) {
+      clickMsgEl.textContent = `🎯 Идеально! ${elapsed.toFixed(2)} сек — +50 монет!`;
+      clickMsgEl.className = 'game-msg win';
+      addCoins(50);
+    } else if (diff <= 0.4) {
+      clickMsgEl.textContent = `👍 Близко! ${elapsed.toFixed(2)} сек — +15 монет`;
+      clickMsgEl.className = 'game-msg hint';
+      addCoins(15);
+    } else {
+      clickMsgEl.textContent = `❌ ${elapsed.toFixed(2)} сек. Нужно 3.00. Попробуйте ещё!`;
+      clickMsgEl.className = 'game-msg lose';
+    }
+    setTimeout(() => { clickTimerEl.textContent = '0.00'; }, 2000);
+  }
+};
+
+// ============ ИГРА 3: РЕАКЦИЯ ============
+let reactionState = 'idle'; // idle | waiting | ready | done
+let reactionStart = 0, reactionTimeout = null;
+
+const reactionZone = document.getElementById('reactionZone');
+const reactionBtn = document.getElementById('reactionBtn');
+
+window.startReaction = () => {
+  if (reactionState === 'waiting') return;
+  reactionState = 'waiting';
+  reactionZone.className = 'reaction-zone wait';
+  reactionZone.textContent = 'Ждите зелёного...';
+  reactionBtn.disabled = true;
+  const delay = 1000 + Math.random() * 3000;
+  reactionTimeout = setTimeout(() => {
+    reactionState = 'ready';
+    reactionZone.className = 'reaction-zone go';
+    reactionZone.textContent = 'ЖМИ!';
+    reactionStart = Date.now();
+  }, delay);
+};
+
+reactionZone.onclick = () => {
+  if (reactionState === 'ready') {
+    const time = Date.now() - reactionStart;
+    reactionState = 'done';
+    clearTimeout(reactionTimeout);
+    reactionBtn.disabled = false;
+    reactionBtn.textContent = 'Ещё раз';
+    if (time < 400) {
+      reactionZone.className = 'reaction-zone result';
+      reactionZone.textContent = `${time} мс — 🎉 +40 монет!`;
+      addCoins(40);
+    } else if (time < 700) {
+      reactionZone.className = 'reaction-zone result';
+      reactionZone.textContent = `${time} мс — 👍 +10 монет`;
+      addCoins(10);
+    } else {
+      reactionZone.className = 'reaction-zone result';
+      reactionZone.textContent = `${time} мс — медленно 😕`;
+    }
+  } else if (reactionState === 'waiting') {
+    // Нажали слишком рано
+    clearTimeout(reactionTimeout);
+    reactionState = 'idle';
+    reactionZone.className = 'reaction-zone wait';
+    reactionZone.textContent = 'Слишком рано! Попробуйте снова';
+    reactionBtn.disabled = false;
+  }
+};
+
+// ============ TOAST ============
+function showToast(text, type) {
+  const t = document.getElementById('toast');
+  t.textContent = text;
+  t.className = 'toast show ' + (type || '');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// СТАРТ
+init();
+</script>
+</body>
+</html>
